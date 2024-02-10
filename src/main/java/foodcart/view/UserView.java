@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 /**
  * Author: Aniket Kumar Mishra
+ * View for users
  */
 public class UserView {
 
@@ -26,7 +27,7 @@ public class UserView {
     }
 
     /**
-     * get list of all foods
+     * get a list of all foods
      */
     public void getAllFood() {
         adminView.getAllFood();
@@ -36,7 +37,7 @@ public class UserView {
      * adding food to the cart for a user
      *
      * @param scanner - Reference of Scanner
-     * @param cart    - cart object
+     * @param cart    - a Cart object
      */
     public void addFoodToCart(Scanner scanner, Cart cart) {
         System.out.println("Enter food name: ");
@@ -47,7 +48,7 @@ public class UserView {
             System.out.println("Given food item is out of stock.\n" +
                     "Please buy another item...");
         } else {
-            int quantity = Validations.validateQuantity(scanner);
+            int quantity = Validations.setValidQuantity(scanner);
 
             if (food.getQuantity() < quantity) {
                 System.out.println("Only " + food.getQuantity() + " piece of this food item is available\n" +
@@ -66,7 +67,7 @@ public class UserView {
      * Remove food from the cart
      *
      * @param scanner - scanner reference
-     * @param cart    - cart to remove food item
+     * @param cart    - a Cart Object to remove food item
      */
     public void removeFoodFromCart(Scanner scanner, Cart cart) {
 
@@ -100,7 +101,12 @@ public class UserView {
             System.out.println("Food not available in the cart.\n");
     }
 
-    public void seeCartDetails(Cart cart){
+    /**
+     * show detail of cart items
+     *
+     * @param cart - a Cart object
+     */
+    public void seeCartDetails(Cart cart) {
 
         System.out.println("********************** Receipt **********************");
         System.out.printf("%-20s%10s%10s%10s%n", "Items", "Quantity", "rs./pic", "Price");
@@ -118,30 +124,40 @@ public class UserView {
         System.out.printf("%-20s%10s%10s%11.2f%n%n", "", "", "Total Price", totalPrice);
     }
 
+    /**
+     * Place user order
+     *
+     * @param scanner - a Scanner object
+     * @param cart    - a Cart object to place user order
+     */
     public void placeOrder(Scanner scanner, Cart cart) {
         if (!cart.getFoodList().isEmpty()) {
             seeCartDetails(cart);
 
             System.out.println("Do you want to place order (yes/no)");
-            String confirmation = userConfirmation(scanner);
+            String confirmation = Validations.userConfirmation(scanner);
 
             if (confirmation.equalsIgnoreCase("yes")) {
                 System.out.println("Please Wait...");
 
-                if(moveCartToOrder(cart)) {
+                if (moveCartToOrder(cart)) {
                     cart.getFoodList().clear();
                     System.out.println("Order Confirmed! Thank you for purchasing...\n");
-                }
-                else
+                } else
                     System.out.println("Something went wrong...");
 
             } else
                 System.out.println("Order Cancelled\n");
-        }else {
+        } else {
             System.out.println("Cart is empty.\n");
         }
     }
 
+    /**
+     * Save cart items to database
+     *
+     * @param cart - a Cart Object
+     */
     public void saveCart(Cart cart) {
         if (cart.getFoodList() != null) {
             if (cartController.saveCart(cart))
@@ -149,11 +165,23 @@ public class UserView {
         }
     }
 
+    /**
+     * load items saved in cart by user
+     *
+     * @param userId - current user id
+     * @return - List of food available in cart for this user
+     */
     public List<Food> loadToCart(int userId) {
         return cartController.loadToCart(userId);
     }
 
-    private boolean moveCartToOrder(Cart cart){
+    /**
+     * moving item from cart table to order table
+     *
+     * @param cart - a Cart Object
+     * @return - true/false
+     */
+    private boolean moveCartToOrder(Cart cart) {
         return cartController.moveCartToOrder(cart);
     }
 
@@ -165,7 +193,7 @@ public class UserView {
      * @return - return valid quantity given by user
      */
     private int validateQuantityToRemove(Scanner scanner, int availableQuantity) {
-        int quantity = 0;
+        int quantity;
         while (true) {
             try {
                 System.out.println("Enter quantity to remove: ");
@@ -183,27 +211,9 @@ public class UserView {
                 System.out.println("Not a valid quantity\n" +
                         "Try again...\n");
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
         return quantity;
-    }
-
-    /**
-     * Taking user confirmation
-     *
-     * @return - user input in string
-     */
-    public String userConfirmation(Scanner scanner) {
-        String confirmation;
-
-        while (true) {
-            confirmation = scanner.nextLine().trim();
-
-            if (confirmation.equalsIgnoreCase("yes") || confirmation.equalsIgnoreCase("no"))
-                break;
-            System.out.println("Choose only yes/no: ");
-        }
-        return confirmation;
     }
 }

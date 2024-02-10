@@ -5,14 +5,19 @@ import java.sql.DriverManager;
 
 /**
  * Author: Aniket Kumar Mishra
+ * A singleton class for database Connection
  */
 public class DBConnection {
     private static Connection connection = null;
 
+    private DBConnection() {
+
+    }
+
     /**
      * Method for establishing connection to the database
      *
-     * @return Connection
+     * @return Connection to a database
      */
     public static Connection establishConnection() {
         if (connection != null)
@@ -36,7 +41,7 @@ public class DBConnection {
             if (connection != null)
                 connection.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }

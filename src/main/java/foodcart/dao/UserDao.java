@@ -6,13 +6,51 @@ import java.util.List;
 
 public interface UserDao {
 
-    public boolean addUser(User user);
+    /**
+     * add a new user to the database
+     *
+     * @param user - A user Object with all user details
+     * @return - true/false
+     */
+    boolean addUser(User user);
 
-    public boolean updateUser(User user);
+    /**
+     * update an existed user
+     *
+     * @param user  - A user Object with all updated user details
+     * @param email - email of the current user
+     * @return - true/false
+     */
+    boolean updateUser(User user, String email);
 
-    public boolean deleteUser(String email);
+    /**
+     * delete an existed user
+     *
+     * @param userId - user id of the current user
+     * @return - true/false
+     */
+    boolean deleteUser(int userId);
 
-    public User findUserByEmail(String email);
+    /**
+     * find details of a user
+     *
+     * @param email - email address of user
+     * @return - User Object
+     */
+    User findUserByEmail(String email);
 
-    public List<User> getAllUser();
+    /**
+     * list of all available users
+     *
+     * @return - Users list
+     */
+    List<User> getAllUser();
+
+    /**
+     * Activate a deactivated user
+     *
+     * @param userId - user id of current user
+     * @return - true/false
+     */
+    boolean activateUser(int userId);
 }

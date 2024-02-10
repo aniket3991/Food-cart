@@ -7,10 +7,16 @@ import java.util.Scanner;
 
 /**
  * Author: Aniket Kumar Mishra
+ * Dashboard execution point of the application
  */
 public class Dashboard {
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
+    public Dashboard() {
+        scanner = new Scanner(System.in);
+    }
+
+    // Entry point of the application
     public static void main(String[] args) {
         new Dashboard().menu();
     }
@@ -35,7 +41,7 @@ public class Dashboard {
 
             switch (option) {
                 case 1:
-                    loginView.adminLogin(scanner);
+                    loginView.adminLogin(scanner, "admin");
                     break;
 
                 case 2:
@@ -43,7 +49,8 @@ public class Dashboard {
                     break;
 
                 case 3:
-                    accountAndUserManagementDashboard();
+                    System.out.println("Only admin can use this features.\n");
+                    loginView.adminLogin(scanner, "management");
                     break;
 
                 case 4:
@@ -128,11 +135,11 @@ public class Dashboard {
         do {
             System.out.println(
                     "Enter 1 to Display All Food Items\n" +
-                    "Enter 2 to Add Food in the Cart\n" +
-                    "Enter 3 to Remove Food from the Cart\n" +
-                    "Enter 4 to See Cart Details\n" +
-                    "Enter 5 to Place Order\n" +
-                    "Enter 6 to Exit\n");
+                            "Enter 2 to Add Food in the Cart\n" +
+                            "Enter 3 to Remove Food from the Cart\n" +
+                            "Enter 4 to See Cart Details\n" +
+                            "Enter 5 to Place Order\n" +
+                            "Enter 6 to Exit\n");
 
             option = validOption();
 
@@ -167,6 +174,7 @@ public class Dashboard {
      * Feature to create and manage accounts
      */
     public void accountAndUserManagementDashboard() {
+        UserManagement userManagement = new UserManagement();
         int option;
         do {
             System.out.println("Enter 1 to Create User Account\n" +
@@ -178,17 +186,17 @@ public class Dashboard {
 
             switch (option) {
                 case 1:
-                    System.out.println("Create User Account");
+                    userManagement.addUser(scanner);
                     break;
                 case 2:
-                    System.out.println("Update User");
+                    userManagement.updateUser(scanner);
                     break;
                 case 3:
-                    System.out.println("Delete User");
+                    userManagement.deleteUser(scanner);
                     break;
                 case 4:
                     System.out.println("Exited from User Section\n" +
-                            "**************************************");
+                            "****************************************");
                     break;
                 default:
                     System.out.println("Choose a correct option");
@@ -210,7 +218,7 @@ public class Dashboard {
             } catch (NumberFormatException nfe) {
                 System.out.println("Please choose given options only");
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
         return option;

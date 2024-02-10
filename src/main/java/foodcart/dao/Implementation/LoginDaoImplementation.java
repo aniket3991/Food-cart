@@ -18,8 +18,9 @@ public class LoginDaoImplementation implements LoginDao {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "select * from tbl_user where email=?");
+                    "select * from tbl_user where email=? and activated_user=?");
             preparedStatement.setString(1, email);
+            preparedStatement.setInt(2,1);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -27,7 +28,7 @@ public class LoginDaoImplementation implements LoginDao {
                 user = new User(resultSet.getInt("user_id"), resultSet.getString("first_name"),
                         resultSet.getString("last_name"), resultSet.getString("role"),
                         resultSet.getString("email"), resultSet.getString("password"),
-                        resultSet.getString("city"));
+                        resultSet.getString("city"), resultSet.getInt("activated_user"));
             }
 
         } catch (Exception e) {

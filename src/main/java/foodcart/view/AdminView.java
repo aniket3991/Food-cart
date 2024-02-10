@@ -11,11 +11,17 @@ import java.util.Scanner;
 
 /**
  * Author: Aniket Kumar Mishra
+ * View for the admins
  */
 public class AdminView {
 
-    private UserController userController = new UserController();
-    private FoodController foodController = new FoodController();
+    private final UserController userController;
+    private final FoodController foodController;
+
+    public AdminView(){
+        userController = new UserController();
+        foodController = new FoodController();
+    }
 
     /**
      * Search single user details
@@ -49,7 +55,7 @@ public class AdminView {
     }
 
     /**
-     * add new food item in database if given food is not available
+     * add new food item in a database if given food is not available
      *
      * @param scanner - reference of Scanner class
      */
@@ -61,9 +67,9 @@ public class AdminView {
         String name = scanner.nextLine();
 
         if (foodController.findFoodByName(name) == null) {
-            double price = Validations.validatePrice(scanner);
+            double price = Validations.setValidPrice(scanner);
 
-            int quantity = Validations.validateQuantity(scanner);
+            int quantity = Validations.setValidQuantity(scanner);
 
             System.out.println("Enter a short description: ");
             String description = scanner.nextLine();
@@ -81,7 +87,7 @@ public class AdminView {
     /**
      * Update details of the existed food item
      *
-     * @param scanner
+     * @param scanner - reference of Scanner class
      */
     public void updateFood(Scanner scanner) {
         System.out.println("Enter name of the food: ");
@@ -94,8 +100,8 @@ public class AdminView {
             System.out.println("Enter name: ");
             food.setName(scanner.nextLine());
 
-            food.setPrice(Validations.validatePrice(scanner));
-            food.setQuantity(Validations.validateQuantity(scanner));
+            food.setPrice(Validations.setValidPrice(scanner));
+            food.setQuantity(Validations.setValidQuantity(scanner));
 
             System.out.println("Enter a short description: ");
             food.setDescription(scanner.nextLine());
@@ -111,7 +117,7 @@ public class AdminView {
     /**
      * delete a specific food
      *
-     * @param scanner
+     * @param scanner - reference of Scanner class
      */
     public void deleteFood(Scanner scanner) {
         System.out.println("Enter name of the food: ");

@@ -14,7 +14,7 @@ public class FoodDaoImplementation implements FoodDao {
     private Connection connection = DBConnection.establishConnection();
 
     /**
-     * add new food details into database
+     * add new food details into a database
      *
      * @param food new Food details
      * @return true/false
@@ -57,9 +57,8 @@ public class FoodDaoImplementation implements FoodDao {
     public boolean updateFood(Food food, String name) {
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement =
-                    connection.prepareStatement("update tbl_food set name=?, price=?, quantity=?," +
-                            "description=? where name=?");
+            preparedStatement = connection.prepareStatement("update tbl_food " +
+                    "set name=?, price=?, quantity=?, description=? where name=?");
 
             preparedStatement.setString(1, food.getName());
             preparedStatement.setDouble(2, food.getPrice());
@@ -86,13 +85,22 @@ public class FoodDaoImplementation implements FoodDao {
 
     /**
      * delete single food item details form database
+     *
      * @param name - name of the food item
      * @return true/false
      */
     @Override
     public boolean deleteFood(String name) {
         PreparedStatement preparedStatement = null;
+        PreparedStatement deleteFromCart;
         try {
+
+            deleteFromCart = connection.prepareStatement("delete from tbl_cart " +
+                    "where food_id=(select food_id from tbl_food where name=?)");
+
+            deleteFromCart.setString(1, name);
+            deleteFromCart.executeUpdate();
+
             preparedStatement = connection.prepareStatement("delete from tbl_food where name=?");
 
             preparedStatement.setString(1, name);
@@ -144,7 +152,8 @@ public class FoodDaoImplementation implements FoodDao {
     }
 
     /**
-     * details of all foods available in database
+     * details of all foods available in a database
+     *
      * @return - List of all foods
      */
     @Override

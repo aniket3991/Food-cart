@@ -13,23 +13,25 @@ public class User {
     private String email;
     private String password;
     private String city;
+    private int isActivated;
 
     public User() {
     }
 
     public User(String firstName, String lastName, String role, String email, String password,
-                String city) {
+                String city, int isActivated) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.email = email;
         this.password = password;
         this.city = city;
+        this.isActivated = isActivated;
     }
 
     public User(int id, String firstName, String lastName, String role, String email, String password,
-                String city) {
-        this(firstName, lastName, role, email, password, city);
+                String city, int isActivated) {
+        this(firstName, lastName, role, email, password, city, isActivated);
         this.id = id;
 
     }
@@ -88,6 +90,14 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getIsActivated() {
+        return isActivated;
+    }
+
+    public void setIsActivated(int isActivated) {
+        this.isActivated = isActivated;
     }
 
     @Override
