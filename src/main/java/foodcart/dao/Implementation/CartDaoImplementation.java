@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CartDaoImplementation implements CartDao {
+
     @Override
     public boolean saveCart(Cart cart) {
         Connection connection = DBConnection.establishConnection();

@@ -40,7 +40,7 @@ public class Validations {
      * @return price - a valid double type
      */
     public static double setValidPrice(Scanner scanner) {
-        double price = 0;
+        double price;
         while (true) {
             try {
                 System.out.println("Enter price: ");
@@ -63,7 +63,7 @@ public class Validations {
      * @return quantity - a valid int type
      */
     public static int setValidQuantity(Scanner scanner) {
-        int quantity = 0;
+        int quantity;
         while (true) {
             try {
                 System.out.println("Enter quantity: ");
@@ -115,7 +115,7 @@ public class Validations {
      * @return - a valid role
      */
     public static String setValidRole(Scanner scanner) {
-        String role = "";
+        String role;
 
         while (true) {
             System.out.println("Enter access limit (Admin/User): ");

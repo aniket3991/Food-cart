@@ -11,8 +11,13 @@ import java.util.List;
 
 public class CartServiceImplementation implements CartService {
 
-    private FoodService foodService = new FoodServiceImplementation();
-    private CartDao cartDao = new CartDaoImplementation();
+    private final FoodService foodService;
+    private final CartDao cartDao;
+
+    public CartServiceImplementation(){
+        foodService = new FoodServiceImplementation();
+        cartDao = new CartDaoImplementation();
+    }
 
     @Override
     public boolean addToCart(Food food, Cart cart) {

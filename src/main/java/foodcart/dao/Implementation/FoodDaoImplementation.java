@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodDaoImplementation implements FoodDao {
-    private Connection connection = DBConnection.establishConnection();
+    private final Connection connection;
+
+    public FoodDaoImplementation(){
+        connection = DBConnection.establishConnection();
+    }
 
     /**
      * add new food details into a database

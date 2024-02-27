@@ -41,7 +41,7 @@ public class Dashboard {
 
             switch (option) {
                 case 1:
-                    loginView.adminLogin(scanner, "admin");
+                    loginView.adminLogin(scanner);
                     break;
 
                 case 2:
@@ -49,8 +49,7 @@ public class Dashboard {
                     break;
 
                 case 3:
-                    System.out.println("Only admin can use this features.\n");
-                    loginView.adminLogin(scanner, "management");
+                    accountAndUserManagementDashboard();
                     break;
 
                 case 4:

@@ -25,14 +25,11 @@ public class LoginView {
      *
      * @param scanner - Scanner reference
      */
-    public void adminLogin(Scanner scanner, String panel) {
+    public void adminLogin(Scanner scanner) {
         String output = login(scanner);
 
-        if (output.equalsIgnoreCase("admin") && panel.equals("admin"))
+        if (output.equalsIgnoreCase("admin"))
             dashboard.adminDashboard();
-
-        else if (output.equalsIgnoreCase("admin") && panel.equals("management"))
-            dashboard.accountAndUserManagementDashboard();
 
         else if (output.equalsIgnoreCase("user"))
             System.out.println("You are not an Admin");

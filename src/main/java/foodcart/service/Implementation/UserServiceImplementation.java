@@ -9,8 +9,11 @@ import java.util.List;
 
 public class UserServiceImplementation implements UserService {
 
-    private UserDao userDao = new UserDaoImplementation();
+    private final UserDao userDao;
 
+    public UserServiceImplementation(){
+        userDao = new UserDaoImplementation();
+    }
     /**
      * add a new user to the database
      * @param user - A user Object with all user details

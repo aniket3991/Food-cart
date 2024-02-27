@@ -3,8 +3,8 @@ package foodcart.service;
 import foodcart.entity.User;
 
 /**
- *
+ * Author: Aniket Kumar Mishra
  */
 public interface LoginService {
-    public User login(String email);
+    User login(String email);
 }

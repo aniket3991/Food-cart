@@ -10,7 +10,11 @@ import java.sql.ResultSet;
 
 public class LoginDaoImplementation implements LoginDao {
 
-    private Connection connection = DBConnection.establishConnection();
+    private final Connection connection;
+
+    public LoginDaoImplementation(){
+        connection = DBConnection.establishConnection();
+    }
 
     @Override
     public User login(String email) {

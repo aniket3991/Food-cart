@@ -42,7 +42,7 @@ public class UserManagement {
             String conformation = Validations.userConfirmation(scanner);
 
             if (conformation.equalsIgnoreCase("yes")) {
-                if(userController.activateUser(existedUser.getId()))
+                if (userController.activateUser(existedUser.getId()))
                     System.out.println("User activated successfully.");
             } else
                 System.out.println("You have to use different mail id for new registration");

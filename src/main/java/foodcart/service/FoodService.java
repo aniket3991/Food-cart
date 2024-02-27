@@ -9,37 +9,42 @@ import java.util.List;
  */
 public interface FoodService {
     /**
-     * add new food details into database
+     * add new food details into a database
+     *
      * @param food new Food details
      * @return true/false
      */
-    public boolean addFood(Food food);
+    boolean addFood(Food food);
 
     /**
      * update details of an existed food item
+     *
      * @param food - details of the new food item
      * @return true/false
      */
 
-    public boolean updateFood(Food food, String name);
+    boolean updateFood(Food food, String name);
 
     /**
      * delete the food item form database
+     *
      * @param name - name of the food
      * @return true/false
      */
-    public boolean deleteFood(String name);
+    boolean deleteFood(String name);
 
     /**
-     * find details of single food item by its name
+     * find details of a single food item by its name
+     *
      * @param name - name of the food
      * @return Food object
      */
-    public Food findFoodByName(String name);
+    Food findFoodByName(String name);
 
     /**
-     * details of all foods available in database
+     * details of all foods available in a database
+     *
      * @return - List of all foods
      */
-    public List<Food> getAllFood();
+    List<Food> getAllFood();
 }

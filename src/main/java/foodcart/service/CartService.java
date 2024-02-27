@@ -8,7 +8,7 @@ import java.util.List;
 public interface CartService {
 
     /**
-     * add new food to cart
+     * add new food to the cart
      * @param food Food item
      */
     boolean addToCart(Food food, Cart cart);

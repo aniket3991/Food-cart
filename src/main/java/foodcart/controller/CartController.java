@@ -12,7 +12,7 @@ public class CartController {
     private CartService cartService = new CartServiceImplementation();
 
     /**
-     * add new food to cart
+     * add new food to the cart
      * @param food food object
      */
     public boolean addToCart(Food food, Cart cart){

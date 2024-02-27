@@ -7,7 +7,11 @@ import foodcart.service.LoginService;
 
 
 public class LoginServiceImplementation implements LoginService {
-    private LoginDao loginDao = new LoginDaoImplementation();
+    private final LoginDao loginDao;
+
+    public LoginServiceImplementation(){
+        loginDao = new LoginDaoImplementation();
+    }
 
     @Override
     public User login(String email) {

@@ -11,7 +11,7 @@ public class FoodController {
     private FoodService foodService = new FoodServiceImplementation();
 
     /**
-     * add new Food item in database
+     * add new Food item in a database
      *
      * @param food new Food details
      * @return - true/false
@@ -30,7 +30,7 @@ public class FoodController {
     }
 
     /**
-     * delete the specific food from database
+     * delete the specific food from a database
      *
      * @param name - name of the food
      * @return true/false

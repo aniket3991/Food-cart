@@ -9,10 +9,14 @@ import java.util.List;
 
 public class FoodServiceImplementation implements FoodService {
 
-    private FoodDao foodDao = new FoodDaoImplementation();
+    private final FoodDao foodDao;
+
+    public FoodServiceImplementation(){
+        foodDao = new FoodDaoImplementation();
+    }
 
     /**
-     * add new food details into database
+     * add new food details into a database
      * @param food new Food details
      * @return true/false
      */
@@ -52,7 +56,7 @@ public class FoodServiceImplementation implements FoodService {
     }
 
     /**
-     * details of all foods available in database
+     * details of all foods available in a database
      * @return - List of all foods
      */
     @Override
